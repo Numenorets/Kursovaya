@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Задать вопрос</title>
+<meta charset="utf-8" />
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.form .first {
+	background: #FFFFFF;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+.form .first textarea {
+	font-family: "Roboto", sans-serif;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+}
+
+.footer {
+	margin-top: 2em;
+}
+
+.footer p {
+	margin: 0px;
+}
+
+textarea {
+	resize: none;
+	height: 200px;
+}
+
+input {
+	font-family: "Roboto", sans-serif;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.form input[type="submit"]:hover, .form input[type="submit"]:active,
+	.form input[type="submit"]:focus {
+	background: #43A047;
+}
+
+h1 {
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+}
+
+.form .first p {
+	font-family: "Roboto", sans-serif;
+	font-size: 14px;
+	background-color: none;
+}
+
+ul {
+	list-style: none;
+	margin: 0 0 0 0;
+	padding: 0;
+	margin-top: 40px;
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+	font-size: 25px;
+}
+
+li {
+	display: inline;
+	padding: 15px;
+}
+
+a {
+	text-decoration: none;
+}
+
+li:nth-child(4) {
+	background-color: #bcfdbf;
+}
+
+li:hover {
+	background-color: #bcfdbf;
+}
+
+.captcha {
+	width: 30%;
+}
+
+.captchaInput {
+	width: 30%;
+}
+</style>
+<script>
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+	window.onload = function() {
+		let number1 = getRandomInt(1, 10);
+		let number2 = getRandomInt(1, 10);
+		document.getElementById("captcha").value = number1 + "+" + number2;
+		document.getElementById('first').onsubmit = function() {
+			return isValidForm();
+		};
+		function isValidForm() {
+			if (document.getElementById('captchaInput').value == number1
+					+ number2) {
+			} else {
+				alert("Посчитайте и введите капчу заново");
+				return false;
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="page">
+		<div class="header">
+			<ul>
+				<li><a href="MainPage.html">Главная страница</a></li>
+				<li><a href="/kr/Auth">Войти</a></li>
+				<li><a href="/kr/RegUser">Регистрация</a></li>
+				<li><a href="/kr/Feedback">Обратная связь</a></li>
+				<li><a href="/kr/FeedbackOutput">Заданные вопросы</a></li>
+			</ul>
+		</div>
+		<div class="content">
+			<h1>Задать вопрос</h1>
+			<div class="form">
+				<form action="/kr/Feedback" method="POST" class="first">
+					<input type="text" name="userName" placeholder="Имя" required /> <input
+						type="email" name="userEmail" placeholder="Электронная почта"
+						required />
+					<textarea placeholder="Вопрос" name="userQuestion" required></textarea>
+					<p>Чему равна сумма ? (введите положительное целочисленное
+						значение)</p>
+					<input type="text" name="captcha" id="captcha" class="captcha"
+						value=" " readonly /> <input type="tel" name="captchaInput"
+						id="captchaInput" class="captchaInput" pattern="^[ 0-9]+$"
+						required /> <input type="submit" value="Отправить вопрос" />
+				</form>
+			</div>
+		</div>
+		<div class="footer">
+			<p>© 2022 Коновалов Эльдар, ИФСТ-31</p>
+			<p>
+				По интересующим вопросам пишите на <a
+					href="mailto:eldar.konovalov@mail.ru">eldar.konovalov@mail.ru</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
